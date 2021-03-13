@@ -26,18 +26,18 @@ public class TransformersController {
 	private TransformersService service;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public boolean createTransformers(@RequestBody Transformer transformer){
+    public Transformer createTransformers(@RequestBody Transformer transformer){
         return this.service.createUpdateTransformers(transformer);
     }
 
     @PutMapping
-    public boolean updateTransformers(@RequestBody Transformer transformer){
+    public Transformer updateTransformers(@RequestBody Transformer transformer){
         return this.service.createUpdateTransformers(transformer);
     }
 
     @DeleteMapping
-    public boolean deleteTransformers(@RequestBody Transformer transformer){
-        return this.service.deleteTransformers(transformer);
+    public Transformer deleteTransformers(@RequestBody Transformer transformer){
+        return this.service.deleteTransformers(transformer.getId());
     }
 
     @GetMapping

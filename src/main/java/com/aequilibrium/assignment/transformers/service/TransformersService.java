@@ -14,12 +14,12 @@ public class TransformersService{
 	@Autowired
 	private TransformersRepository transformersRepository;
 	
-	public boolean createUpdateTransformers(Transformer transformer) {
+	public Transformer createUpdateTransformers(Transformer transformer) {
 		return this.transformersRepository.createUpdateTransformers(transformer);
 	}
 	
-	public boolean deleteTransformers(Transformer transformer) {
-		return this.transformersRepository.deleteTransformers(transformer);
+	public Transformer deleteTransformers(String id) {
+		return this.transformersRepository.deleteTransformers(id);
 	}
 	
 	public Set<Transformer> getTransformerList(){

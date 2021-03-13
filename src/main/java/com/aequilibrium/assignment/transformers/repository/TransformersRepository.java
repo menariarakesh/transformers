@@ -1,8 +1,8 @@
 package com.aequilibrium.assignment.transformers.repository;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,44 +14,31 @@ import com.aequilibrium.assignment.transformers.utils.TransformersUtil;
 @Repository
 public class TransformersRepository {
     
-	private final Set<Transformer> autobotsDataStore = new TreeSet<>();
-	private final Set<Transformer> decepticonsDataStore = new TreeSet<>();
+	private final Map<String, Transformer> tranformerDataStore = new HashMap<>();
     
-    public boolean createUpdateTransformers(Transformer transformer) {
+    public Transformer createUpdateTransformers(Transformer transformer) {
     	
     	if(transformer == null)
     		throw new RuntimeException("Transformer can not be null");
     	
-    	if(transformer.getType() == null)
-    		throw new RuntimeException("Transformer type can not be null");
     	
-    	if(transformer.getType().equalsIgnoreCase(TransformersUtil.AUTOBOTS)) {
-    		return autobotsDataStore.add(transformer);
-    	} else {
-    		return decepticonsDataStore.add(transformer);
-    	}
+    	return tranformerDataStore.put(transformer.getId(),transformer);
+    	
     	
     }
     
-    public boolean deleteTransformers(Transformer transformer) {
+    public Transformer deleteTransformers(String id) {
     	
-    	if(transformer == null)
-    		throw new RuntimeException("Transformer can not be null");
+    	if(id == null)
+    		throw new RuntimeException("Transformer ID can not be null");
     	
-    	if(transformer.getType() == null)
-    		throw new RuntimeException("Transformer type can not be null");
-    	
-    	if(transformer.getType().equalsIgnoreCase(TransformersUtil.AUTOBOTS)) {
-    		return autobotsDataStore.remove(transformer);
-    	} else {
-    		return decepticonsDataStore.remove(transformer);
-    	}
-    	
+    	return tranformerDataStore.remove(id);
     }
     
     public Set<Transformer> getTransformerList(){
-    	return Stream.of(autobotsDataStore, decepticonsDataStore) 
+    	return (Set<Transformer>) Stream.of(tranformerDataStore.entrySet()) 
                 .flatMap(x -> x.stream()) 
+                .map(Map.Entry::getValue)
                 .collect(Collectors.toSet()); 
     }
 }

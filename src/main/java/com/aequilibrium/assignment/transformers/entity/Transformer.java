@@ -48,6 +48,31 @@ public class Transformer<T> implements Comparable<T> {
 			throw new RuntimeException(TransformersUtil.TYPE_VALIDATION_MESSAGE);
 		
 		Transformer other = (Transformer) o;
-		return this.getId().compareTo(other.getId());
+		return this.getSkill()-other.getSkill();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transformer other = (Transformer) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 }
