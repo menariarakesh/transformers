@@ -15,6 +15,7 @@ public class Transformer<T> implements Comparable<T> {
     private String id;
 	
     private String type;
+    private String name;
     
     @Size(min = 1, max = 10, message = TransformersUtil.SIZE_VALIDATION_MESSAGE)
     private int strength;
@@ -36,6 +37,8 @@ public class Transformer<T> implements Comparable<T> {
     
     @Size(min = 1, max = 10, message = TransformersUtil.SIZE_VALIDATION_MESSAGE)
     private int firepower;
+    
+    private boolean isEliminated = false;
     
     public int getSkill() {
     	return strength + intelligence + speed + endurance + firepower;
